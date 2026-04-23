@@ -1,29 +1,35 @@
 /**
  * Displays a timer completion message after a set amount of time.
- * @param {number} time The amount of time the timer counts down from.
  */
 function timer() {      // timer function with a set
     var timeInput = document.getElementById("time-input");                      // get input element from DOM.
     setTimeout(() => {alert("Timer Over")}, secondsToMilli(timeInput.value));   // 
 }
 
-
 /**
  * Counts down from a set amount of time and displays a completion message.
- * @param {number} time The amount of time the timer counts down from in seconds
  */
 function countdown() {
     var timeInput = document.getElementById("time-input");
     var count = timeInput.value;                           // count keeps track of the countdown.
     var myInterval = setInterval(() => {        // every 1 second...
         count--;                                // ...decrement count...
-        console.log(count);                     // ...display count...
+        updateDisplay(count);                     // ...display count...
         if (count == 0) {                       // ...if count is 0, stop the interval.
             clearInterval(myInterval);
             alert("Finished");
         }
     }, 1000);
 
+}
+
+/**
+ * Update the time display
+ * @param {number} time the time to be displayed.
+ */
+var timeDisplay = document.getElementById("time-display");
+function updateDisplay(time) {
+    timeDisplay.innerText = time;
 }
 
 /**
