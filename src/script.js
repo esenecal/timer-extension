@@ -40,3 +40,8 @@ function updateDisplay(time) {
 function secondsToMilli(seconds) {
     return seconds * 1000;
 }
+
+
+// Event Handlers
+document.getElementById("timer").addEventListener('click', timer);
+document.getElementById("countdown-timer").addEventListener('click', countdown);
