@@ -1,0 +1,15 @@
+{
+    "manifest_version": 3,
+    "name": "timer-extension",
+    "version": "0.1",
+
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "timer-extension-test",
+            "data_collection_permissions": {
+                "required": ["none"]
+            }
+        }
+    }
+
+}
