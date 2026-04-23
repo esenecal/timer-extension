@@ -2,9 +2,15 @@
 
 **Overall Goal**: create a timer Firefox extension, with a timer countdown, setting a time, an alert, pause and reset buttons.
 
-## Sprint 2: 2026-04-23--present
+## Sprint 2: Extension Prototype
 
-## Sprint 1: 2026-04-23
+2026-04-23--present
+
+**Goal**: create a basic extension GUI
+
+## Sprint 1: Command Line Prototype
+
+2026-04-23
 
 **Goal**: create a basic command line prototype of a timer.
 
