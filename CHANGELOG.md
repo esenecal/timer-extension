@@ -6,7 +6,7 @@
 
 2026-04-23--present
 
-**Goal**: create a basic extension GUI
+**Goal**: create a basic GUI and implement the timer into it
 
 ## Sprint 1: Command Line Prototype
 
