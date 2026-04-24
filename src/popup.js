@@ -45,13 +45,18 @@ function secondsToMilli(seconds) {
     return seconds * 1000;
 }
 
+/**
+ * Start the timer by sending a message to background.js
+ */
+function startTimer() {
+    // sends a message to the background script, as defined in manifest.json. Sends a message with an action "start"
+    browser.runtime.sendMessage({
+        action: 'start'
+    });
+}
 
 // Event Handlers
-document.getElementById("timer").addEventListener('click', timer);
+document.getElementById("timer").addEventListener('click', startTimer);
 document.getElementById("countdown-timer").addEventListener('click', countdown);
 
 
-// sends a message to the background script, as defined in manifest.json. Sends a message with an action "start"
-browser.runtime.sendMessage({
-    action: 'start',
-});
