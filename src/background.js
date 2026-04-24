@@ -11,7 +11,7 @@ function timer(time) {
 browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === 'start') {
         timer(5000);
-        sendResponse({ logged: true })
+        sendResponse({ logged: true });
     }
 });
 

@@ -48,11 +48,12 @@ function secondsToMilli(seconds) {
 /**
  * Start the timer by sending a message to background.js
  */
-function startTimer() {
+async function startTimer() {
     // sends a message to the background script, as defined in manifest.json. Sends a message with an action "start"
-    browser.runtime.sendMessage({
+    var response = await browser.runtime.sendMessage({
         action: 'start'
     });
+    console.log(response);
 }
 
 // Event Handlers
