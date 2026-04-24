@@ -1,3 +1,7 @@
+// send message from popup.js to background.js to initiate and detect completion of timers.
+
+// popup.js - used for 
+
 /**
  * Displays a timer completion message after a set amount of time.
  */
@@ -45,3 +49,9 @@ function secondsToMilli(seconds) {
 // Event Handlers
 document.getElementById("timer").addEventListener('click', timer);
 document.getElementById("countdown-timer").addEventListener('click', countdown);
+
+
+// sends a message to the background script, as defined in manifest.json. Sends a message with an action "start"
+browser.runtime.sendMessage({
+    action: 'start',
+});
