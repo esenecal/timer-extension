@@ -1,32 +1,5 @@
 // send message from popup.js to background.js to initiate and detect completion of timers.
 
-// popup.js - used for 
-
-/**
- * Displays a timer completion message after a set amount of time.
- */
-function timer() {      // timer function with a set
-    var timeInput = document.getElementById("time-input");                      // get input element from DOM.
-    setTimeout(() => {alert("Timer Over")}, secondsToMilli(timeInput.value));   // 
-}
-
-/**
- * Counts down from a set amount of time and displays a completion message.
- */
-function countdown() {
-    var timeInput = document.getElementById("time-input");
-    var count = timeInput.value;                           // count keeps track of the countdown.
-    var myInterval = setInterval(() => {        // every 1 second...
-        count--;                                // ...decrement count...
-        updateDisplay(count);                     // ...display count...
-        if (count == 0) {                       // ...if count is 0, stop the interval.
-            clearInterval(myInterval);
-            alert("Finished");
-        }
-    }, 1000);
-
-}
-
 /**
  * Update the time display
  * @param {number} time the time to be displayed.
@@ -34,15 +7,6 @@ function countdown() {
 var timeDisplay = document.getElementById("time-display");
 function updateDisplay(time) {
     timeDisplay.innerText = time;
-}
-
-/**
- * Convert seconds to milliseconds.
- * @param {number} seconds The amount of time in seconds to be converted to ms.
- * @returns {number} The original time in milliseconds. 
- */
-function secondsToMilli(seconds) {
-    return seconds * 1000;
 }
 
 /**
@@ -54,13 +18,26 @@ async function startTimer() {
     // sends a message to the background script, as defined in manifest.json. Sends a message with an action "start"
     var response = await browser.runtime.sendMessage({
         action: 'start',
-        time: timeInput.value           // send the time input in the object.
+        time: timeInput.value           // send the time input in the object. Would converting to ms here be better?
+    });
+    console.log(response);
+}
+
+/**
+ * Start the countdown timer by sending a message to background.js
+ */
+async function startCountdown() {
+    var timeInput = document.getElementById("time-input");
+
+    var response = await browser.runtime.sendMessage({
+        action: 'startCountdown',
+        time: timeInput.value
     });
     console.log(response);
 }
 
 // Event Handlers. Onclick at the elements defined by the ID, the associated function is executed.
 document.getElementById("timer").addEventListener('click', startTimer);
-document.getElementById("countdown-timer").addEventListener('click', countdown);
+document.getElementById("countdown-timer").addEventListener('click', startCountdown);
 
 
