@@ -1,5 +1,10 @@
 // send message from popup.js to background.js to initiate and detect completion of timers.
 
+// a few things we can do:
+// save timer display in storage, update it to storage so that it can be pulled by popup.js
+// save timer display data in background.js, have popup rqeuest and pull it whenever it is open. 
+// Haiku 4.5 suggests using browser.runtime.connect().
+
 /**
  * Update the time display
  * @param {number} time the time to be displayed.
@@ -39,5 +44,3 @@ async function startCountdown() {
 // Event Handlers. Onclick at the elements defined by the ID, the associated function is executed.
 document.getElementById("timer").addEventListener('click', startTimer);
 document.getElementById("countdown-timer").addEventListener('click', startCountdown);
-
-

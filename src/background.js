@@ -1,5 +1,8 @@
 // background.js
 
+var display = 0;    // variable to be displayed by the popup. Retrieved by popup.js.
+var connectionPort = null;
+
 /**
  * Indicate the start and finish of a timeout in the console.
  * @param {number} time Time to countdown from in milliseconds
@@ -7,7 +10,8 @@
 function timer(time) {
     console.log("start");
     setTimeout(() => {
-        console.log('finish');
+            console.log('finish');
+            display = "DONE";
     }, time);
 }
 
@@ -17,13 +21,13 @@ function timer(time) {
  */
 function countdown(time) {                      // TIME IS IN SECONDS
     console.log('start');
-    var count = time;                           // count keeps track of the countdown.
+    display = time;                           // display keeps track of the countdown.
 
     var myInterval = setInterval(() => {        // every 1 second...
-        count--;                                // ...decrement count...
-        console.log(count)                      // display count would be here.
+        display--;                              // ...decrement count...
         if (count == 0) {                       // ...if count is 0, stop the interval.
-            clearInterval(myInterval);
+            clearInterval(myInterval);          // clear interval
+            display = "FINISH";                 // indicate finish.
             console.log('finish');
         }
     }, 1000);
@@ -49,5 +53,18 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === 'startCountdown') {  // start countdown.
         countdown(request.time);
         sendResponse({ logged: true });
+    }
+});
+
+// listening for connection from popup.js
+browser.runtime.onConnect.addListener((port) => {
+    if (port.name === 'timerPort') {
+        connectionPort = port;
+        console.log("Connection made");
+        
+        port.onDisconnect.addListener(() => {
+            connectionPort = null;
+            console.log("Connection disconnected");
+        });
     }
 });
