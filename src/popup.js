@@ -3,7 +3,10 @@
 // a few things we can do:
 // save timer display in storage, update it to storage so that it can be pulled by popup.js
 // save timer display data in background.js, have popup rqeuest and pull it whenever it is open. 
-// Haiku 4.5 suggests using browser.runtime.connect().
+// Haiku 4.5 suggests using browser.runtime.connect() to push to popup when a connection is present, alongside browser local storage to track when a timer completes.
+// Plan, based off of what we have learned:
+// use runtime.connect to update the countdown whenever it is connected. If not connected, background.js still runs, just doesn't
+// push to popup. When a timer completes, this is stored to storage, which is routinely checked by popup.js whenever it is opened.
 
 var port = browser.runtime.connect({ name: "timerPort" });  // connection variable for communicating with background. 
                                                             // immediately makes connection with background. 
@@ -48,8 +51,9 @@ async function startCountdown() {
  * Connection with background.js, listening from 
  * 
  */
-myPort.onMessage.addListener((message) => {
+port.onMessage.addListener((message) => {
     console.log("Message from background ");
+    console.log(message.text);
 });
 
 // Event Handlers. Onclick at the elements defined by the ID, the associated function is executed.

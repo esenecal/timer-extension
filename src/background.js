@@ -10,8 +10,11 @@ var connectionPort = null;
 function timer(time) {
     console.log("start");
     setTimeout(() => {
-            console.log('finish');
+            // console.log('finish');
             display = "DONE";
+            if (connectionPort) {
+                connectionPort.postMessage({ text: "Timer done" });     // send completion message to popup.js
+            }
     }, time);
 }
 
@@ -59,7 +62,7 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
 // listening for connection from popup.js. Haiku 4.5 provided example code. 
 browser.runtime.onConnect.addListener((port) => {
     if (port.name === 'timerPort') {            // when popup is opened, it automatically establishes a connection and runs this.
-        connectionPort = port;
+        connectionPort = port;                  // get the connection variable from popup.js
         console.log("Connection made");
         
         port.onDisconnect.addListener(() => {   // When the popup is closed, connection ends. 
