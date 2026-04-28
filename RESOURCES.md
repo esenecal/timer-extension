@@ -5,6 +5,7 @@ Various resources/references that were helpful in creating this project.
 
 [MDN: Your First Extension](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension): Mozilla tutorial for creating a basic Firefox extension.
 [MDN: Documentation for runtime.connect](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/runtime/connect)
+[MDN: Extension Local Storage](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/storage/local)
 
 [W3 HTML Validator](https://validator.w3.org/)
 

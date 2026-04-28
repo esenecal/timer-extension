@@ -3,7 +3,11 @@
     "name": "timer-extension",
     "version": "0.1",
 
-    "permissions": ["activeTab", "scripting"],
+    "permissions": [
+        "activeTab", 
+        "scripting",
+        "storage"
+    ],
     "browser_specific_settings": {
         "gecko": {
             "id": "timer-extension@text.com",

@@ -12,13 +12,21 @@ var port = browser.runtime.connect({ name: "timerPort" });  // connection variab
                                                             // immediately makes connection with background. 
 var display;    // message to be displayed
 
+var timerComplete;
+
+if (typeof browser.storage.local.get("timerComplete") === 'undefined') {     // if local storage is undefined, then set to true.
+    timerComplete = true;
+} else {
+    timerComplete = browser.storage.local.get("timerComplete");     // otherwise, if local storage is defined, then get value.
+}
+
 /**
  * Update the time display
  * @param {number} time the time to be displayed.
  */
 var timeDisplay = document.getElementById("time-display");
-function updateDisplay(time) {
-    timeDisplay.innerText = time;
+function updateDisplay(message) {
+    timeDisplay.innerText = message;
 }
 
 /**
@@ -37,10 +45,14 @@ async function startCountdown() {
 /**
  * Connection with background.js. Update display.
  */
-port.onMessage.addListener((message) => {
-    display = message.display;
-    updateDisplay(display);
-});
+if (!timerComplete) {        // if the timer is not complete, then get updates.
+    port.onMessage.addListener((message) => {
+        display = message.display;
+        updateDisplay(display);
+    });
+} else {
+    updateDisplay("No Timer Running");
+}
 
 // Event Handlers. Onclick at the elements defined by the ID, the associated function is executed.
 document.getElementById("countdown-timer").addEventListener('click', startCountdown);

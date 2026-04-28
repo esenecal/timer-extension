@@ -8,8 +8,9 @@ var connectionPort = null;
  * @param {number} time Time to countdown from in seconds
  */
 function countdown(time) {                      // TIME IS IN SECONDS
+    browser.storage.local.set({ timerComplete: false });    // save timerComplete false to local storage.
     console.log('start');
-    display = time;                           // display keeps track of the countdown.
+    display = time;                             // display keeps track of the countdown.
 
     var myInterval = setInterval(() => {        // every 1 second...
 
@@ -22,6 +23,10 @@ function countdown(time) {                      // TIME IS IN SECONDS
         if (display == 0) {                     // ...if count is 0, stop the interval.
             clearInterval(myInterval);          // clear interval
             display = "FINISH";                 // indicate finish.
+            timerComplete = true;               // set timerComplete state to true.
+
+            browser.storage.local.set({ timerComplete: true });    // save timerComplete true to local storage.
+
             console.log('finish');
         }
     }, 1000);
