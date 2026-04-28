@@ -12,8 +12,14 @@ function countdown(time) {                      // TIME IS IN SECONDS
     display = time;                           // display keeps track of the countdown.
 
     var myInterval = setInterval(() => {        // every 1 second...
+
         display--;                              // ...decrement count...
-        if (count == 0) {                       // ...if count is 0, stop the interval.
+
+        if (connectionPort) {                   // if connectionPort is open, send display to popup.js
+            connectionPort.postMessage({ display: display });
+        }
+
+        if (display == 0) {                     // ...if count is 0, stop the interval.
             clearInterval(myInterval);          // clear interval
             display = "FINISH";                 // indicate finish.
             console.log('finish');

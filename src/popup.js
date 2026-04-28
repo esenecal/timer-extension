@@ -10,6 +10,7 @@
 
 var port = browser.runtime.connect({ name: "timerPort" });  // connection variable for communicating with background. 
                                                             // immediately makes connection with background. 
+var display;    // message to be displayed
 
 /**
  * Update the time display
@@ -34,12 +35,11 @@ async function startCountdown() {
 }
 
 /**
- * Connection with background.js, listening from 
- * 
+ * Connection with background.js. Update display.
  */
 port.onMessage.addListener((message) => {
-    console.log("Message from background ");
-    console.log(message.text);
+    display = message.display;
+    updateDisplay(display);
 });
 
 // Event Handlers. Onclick at the elements defined by the ID, the associated function is executed.
