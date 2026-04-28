@@ -4,21 +4,6 @@ var display = 0;    // variable to be displayed by the popup. Retrieved by popup
 var connectionPort = null;
 
 /**
- * Indicate the start and finish of a timeout in the console.
- * @param {number} time Time to countdown from in milliseconds
- */
-function timer(time) {
-    console.log("start");
-    setTimeout(() => {
-            // console.log('finish');
-            display = "DONE";
-            if (connectionPort) {
-                connectionPort.postMessage({ text: "Timer done" });     // send completion message to popup.js
-            }
-    }, time);
-}
-
-/**
  * Counts down from a set amount of time and displays a completion message.
  * @param {number} time Time to countdown from in seconds
  */
