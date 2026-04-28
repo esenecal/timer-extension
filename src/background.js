@@ -56,13 +56,13 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 });
 
-// listening for connection from popup.js
+// listening for connection from popup.js. Haiku 4.5 provided example code. 
 browser.runtime.onConnect.addListener((port) => {
-    if (port.name === 'timerPort') {
+    if (port.name === 'timerPort') {            // when popup is opened, it automatically establishes a connection and runs this.
         connectionPort = port;
         console.log("Connection made");
         
-        port.onDisconnect.addListener(() => {
+        port.onDisconnect.addListener(() => {   // When the popup is closed, connection ends. 
             connectionPort = null;
             console.log("Connection disconnected");
         });
