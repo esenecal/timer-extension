@@ -9,6 +9,8 @@ var connectionPort = null;
  */
 function countdown(time) {                      // TIME IS IN SECONDS
     browser.storage.local.set({ timerComplete: false });    // save timerComplete false to local storage.
+    // browser.storage.local.get("timerComplete").then((response) => console.log(response.timerComplete));
+
     console.log('start');
     display = time;                             // display keeps track of the countdown.
 
@@ -18,6 +20,8 @@ function countdown(time) {                      // TIME IS IN SECONDS
 
         if (connectionPort) {                   // if connectionPort is open, send display to popup.js
             connectionPort.postMessage({ display: display });
+            console.log(display);
+            // browser.storage.local.get("timerComplete").then((response) => console.log(response.timerComplete));
         }
 
         if (display == 0) {                     // ...if count is 0, stop the interval.
@@ -44,11 +48,6 @@ function secondsToMilli(seconds) {
 
 // receives the message from popup.js. Uses request to check which action was sent. Responds and prints to the console.
 browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action === 'start') {           // start the timer
-        timer(secondsToMilli(request.time));    // get the time from the time-input in the DOM, sent in the request.
-        sendResponse({ logged: true });
-    }
-
     if (request.action === 'startCountdown') {  // start countdown.
         countdown(request.time);
         sendResponse({ logged: true });

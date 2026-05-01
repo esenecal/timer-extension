@@ -14,11 +14,13 @@ var display;    // message to be displayed
 
 var timerComplete;
 
-if (typeof browser.storage.local.get("timerComplete") === 'undefined') {     // if local storage is undefined, then set to true.
+// Get the timerComplete value from local storage. get returns a promise that must be resolved.
+timerComplete = Promise.resolve(browser.storage.local.get("timerComplete"));
+
+if (typeof timerComplete === 'undefined') {     // if timerComplete is undefined, then set to true. Any existing value is already there.
     timerComplete = true;
-} else {
-    timerComplete = browser.storage.local.get("timerComplete");     // otherwise, if local storage is defined, then get value.
 }
+
 
 /**
  * Update the time display
@@ -42,17 +44,25 @@ async function startCountdown() {
     console.log(response);
 }
 
+
+port.onMessage.addListener((message) => {   // timerComplete must be checked here--otherwise, the updates won't show if it is set to true.
+    display = message.display;
+    updateDisplay(display);
+});
+
 /**
  * Connection with background.js. Update display.
  */
-if (!timerComplete) {        // if the timer is not complete, then get updates.
-    port.onMessage.addListener((message) => {
+if (timerComplete) {
+    updateDisplay("No Timer Running");
+} else {
+    port.onMessage.addListener((message) => {   // timerComplete must be checked here--otherwise, the updates won't show if it is set to true.
         display = message.display;
         updateDisplay(display);
-    });
-} else {
-    updateDisplay("No Timer Running");
+    });    
 }
 
 // Event Handlers. Onclick at the elements defined by the ID, the associated function is executed.
 document.getElementById("countdown-timer").addEventListener('click', startCountdown);
+
+// on page open
