@@ -1,6 +1,6 @@
 // background.js
 
-var display = 0;    // variable to be displayed by the popup. Retrieved by popup.js.
+var display = 0;                // variable to be displayed by the popup. Retrieved by popup.js.
 var connectionPort = null;
 
 /**
@@ -9,7 +9,6 @@ var connectionPort = null;
  */
 function countdown(time) {                      // TIME IS IN SECONDS
     browser.storage.local.set({ timerComplete: false });    // save timerComplete false to local storage.
-    // browser.storage.local.get("timerComplete").then((response) => console.log(response.timerComplete));
 
     console.log('start');
     display = time;                             // display keeps track of the countdown.
@@ -27,11 +26,11 @@ function countdown(time) {                      // TIME IS IN SECONDS
 
             console.log('finish');
         }
+
         // when display <= 0, this still runs one final time. 
-        if (connectionPort) {                   // if connectionPort is open, send display to popup.js
+        if (connectionPort) {       // if connectionPort is open, send display to popup.js
             connectionPort.postMessage({ display: display });
             console.log(display);
-            // browser.storage.local.get("timerComplete").then((response) => console.log(response.timerComplete));
         }
 
     }, 1000);
