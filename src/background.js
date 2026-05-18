@@ -18,13 +18,7 @@ function countdown(time) {                      // TIME IS IN SECONDS
 
         display--;                              // ...decrement count...
 
-        if (connectionPort) {                   // if connectionPort is open, send display to popup.js
-            connectionPort.postMessage({ display: display });
-            console.log(display);
-            // browser.storage.local.get("timerComplete").then((response) => console.log(response.timerComplete));
-        }
-
-        if (display == 0) {                     // ...if count is 0, stop the interval.
+        if (display <= 0) {                     // ...if count is 0, stop the interval.
             clearInterval(myInterval);          // clear interval
             display = "FINISH";                 // indicate finish.
             timerComplete = true;               // set timerComplete state to true.
@@ -33,8 +27,14 @@ function countdown(time) {                      // TIME IS IN SECONDS
 
             console.log('finish');
         }
-    }, 1000);
+        // when display <= 0, this still runs one final time. 
+        if (connectionPort) {                   // if connectionPort is open, send display to popup.js
+            connectionPort.postMessage({ display: display });
+            console.log(display);
+            // browser.storage.local.get("timerComplete").then((response) => console.log(response.timerComplete));
+        }
 
+    }, 1000);
 }
 
 /**

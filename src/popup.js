@@ -44,8 +44,8 @@ async function startCountdown() {
     console.log(response);
 }
 
-
-port.onMessage.addListener((message) => {   // timerComplete must be checked here--otherwise, the updates won't show if it is set to true.
+// constantly listening for timer
+port.onMessage.addListener((message) => {
     display = message.display;
     updateDisplay(display);
 });
