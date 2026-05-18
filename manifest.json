@@ -10,7 +10,7 @@
     ],
     "browser_specific_settings": {
         "gecko": {
-            "id": "timer-extension@text.com",
+            "id": "@timer-extension",
             "data_collection_permissions": {
                 "required": ["none"]
             }

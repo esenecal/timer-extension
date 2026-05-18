@@ -1,6 +1,6 @@
 # Changelog
 
-**Overall Goal**: create a timer Firefox extension, with a timer countdown, setting a time, an alert, pause and reset buttons.
+**Overall Goal**: create a timer extension, with a timer countdown, setting a time, an alert, pause and reset buttons.
 
 ## Sprint 2: Extension Prototype
 
