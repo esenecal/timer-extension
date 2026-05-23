@@ -2,6 +2,10 @@
 
 A timer extension for Firefox.
 
+## How to Download
+
+Download the `.xpi` file from versions. Open it in with Firefox (either by double clicking it and selecting Firefox, right clicking and selecting Open With, etc). Firefox will open it and immediately offer to add it to your browser.
+
 ## Notable Files
 
 - `CHANGELOG.md`: provides a record of the development process, based on an agile-style development method. An overall goal is given, with "sprints" breaking it down into steps. Each sprint contains a report on various stages of the sprint, including planning, development, building, etc. Various portions may be ommitted if they are deemed unnecessary.

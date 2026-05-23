@@ -10,7 +10,7 @@ var connectionPort = null;
 function countdown(time) {                      // TIME IS IN SECONDS
     browser.storage.local.set({ timerComplete: false });    // save timerComplete false to local storage.
 
-    console.log('start');
+    // console.log('start');
     display = time;                             // display keeps track of the countdown.
 
     var myInterval = setInterval(() => {        // every 1 second...
@@ -24,13 +24,13 @@ function countdown(time) {                      // TIME IS IN SECONDS
 
             browser.storage.local.set({ timerComplete: true });    // save timerComplete true to local storage.
 
-            console.log('finish');
+            // console.log('finish');
         }
 
         // when display <= 0, this still runs one final time. 
         if (connectionPort) {       // if connectionPort is open, send display to popup.js
             connectionPort.postMessage({ display: display });
-            console.log(display);
+            // console.log(display);
         }
 
     }, 1000);
@@ -53,15 +53,15 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 });
 
-// listening for connection from popup.js. Haiku 4.5 provided example code. 
+// listening for connection from popup.js. Haiku 4.5 provided example code that was referenced.
 browser.runtime.onConnect.addListener((port) => {
     if (port.name === 'timerPort') {            // when popup is opened, it automatically establishes a connection and runs this.
         connectionPort = port;                  // get the connection variable from popup.js
-        console.log("Connection made");
+        // console.log("Connection made");
         
         port.onDisconnect.addListener(() => {   // When the popup is closed, connection ends. 
             connectionPort = null;
-            console.log("Connection disconnected");
+            // console.log("Connection disconnected");
         });
     }
 });

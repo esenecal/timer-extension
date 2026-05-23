@@ -13,6 +13,7 @@ Various resources/references that were helpful in creating this project.
 [GeeksForGeeks JSdoc Comments](https://www.geeksforgeeks.org/javascript/documentation-comments-in-jsdoc/): use of JSdoc comments.
 
 [Installing Extension](https://stackoverflow.com/questions/62237202/firefox-add-ons-how-to-install-my-own-local-add-on-extension-permanently-in-f)
+[Installing Extensions (resource from Firefox)](https://extensionworkshop.com/documentation/publish/install-self-distributed/)
 [Building Firefox Extensions](https://hemaks.org/posts/building-firefox-extensions-with-javascript-your-complete-guide-from-zero-to-published/): good starting point for learning about the different scripts within a Firefox extension.
 
 

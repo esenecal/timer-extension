@@ -34,7 +34,7 @@ async function startCountdown() {
         action: 'startCountdown',
         time: timeInput.value
     });
-    console.log(response);
+    // console.log(response);
 }
 
 // constantly listening for timer
