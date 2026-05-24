@@ -2,9 +2,12 @@
 
 **Overall Goal**: create a timer extension, with a timer countdown, setting a time, an alert, pause and reset buttons.
 
+## Known Bugs:
+- Clicking start button during countdown causes countdown to become altered and display variable to change to NaN.
+
 ## Sprint 2: Extension Prototype
 
-2026-04-23--
+2026-04-23 to 2026-05-23
 
 **Goal**: create a basic GUI and implement the timer into it
 
@@ -27,6 +30,12 @@
     - `countdown`: function that provides a countdown in seconds from the timer input amount. If a connectionPort is open, it sends this information to `popup.js` for display. It triggers `timerComplete` in local storage according to the timer status.
     - `onMessage` listener: listens for timer start message from `popup.js`. Calls countdown.
     - `onConnect` listener: listens for an onConnect connection from popup.js. 
+
+**Test**:
+- Intermittent testing was done during development, including starting the timer from 0. A known bug exists where the start button is clicked during a timer currently running, causing the display value to become not a number and altering the countdown. This will be addressed in a future sprint. 
+
+**Review**:
+- This was a good exercise in learning extension structure and getting a basic prototype working.
 
 ## Sprint 1: Command Line Prototype
 
